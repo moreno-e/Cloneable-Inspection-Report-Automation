@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Durham County Infrastructure Maintenance Portal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+        }
+        h2 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        .input-group {
+            margin-bottom: 20px;
+        }
+        .input-group label {
+            display: block;
+            color: #444;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .input-group input,
+        .input-group select,
+        .input-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 15px;
+            transition: all 0.3s;
+            font-family: Arial, sans-serif;
+        }
+        .input-group input:focus,
+        .input-group select:focus,
+        .input-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        .input-group textarea {
+            min-height: 100px;
+            resize: none;
+        }
+        .submit-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: transform 0.2s;
+        }
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+        .confirmation {
+            display: none;
+            text-align: center;
+            padding: 40px;
+        }
+        .confirmation h3 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        .confirmation p {
+            color: #666;
+            line-height: 1.6;
+        }
+        .checkmark {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: #4caf50;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            margin: 0 auto 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="formContent">
+            <h2>Infrastructure Maintenance Request</h2>
+            <p class="subtitle">Durham County Public Works Department</p>
+
+            <form id="maintenanceForm">
+                <div class="input-group">
+                    <label for="site-address">Site Address</label>
+                    <input type="text" id="site-address" name="site-address" placeholder="Enter full address" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="issue-category">Issue Category</label>
+                    <select id="issue-category" name="issue-category" required>
+                        <option value="">Choose category...</option>
+                        <option value="power-infrastructure">Power Infrastructure</option>
+                        <option value="telecom-equipment">Telecommunications Equipment</option>
+                        <option value="structural-concern">Structural Concern</option>
+                        <option value="equipment-failure">Equipment Failure</option>
+                        <option value="environmental-damage">Environmental Damage</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label for="urgency">Urgency Rating</label>
+                    <select id="urgency" name="urgency" required>
+                        <option value="">Select urgency...</option>
+                        <option value="1">1 - Critical (Immediate response)</option>
+                        <option value="2">2 - High (Within 1 week)</option>
+                        <option value="3">3 - Medium (Within 30 days)</option>
+                        <option value="4">4 - Low (Routine maintenance)</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label for="description">Description of Issue</label>
+                    <textarea id="description" name="description" placeholder="Provide detailed information about the maintenance issue..." required></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">Submit Request</button>
+            </form>
+        </div>
+
+        <div id="confirmation" class="confirmation">
+            <div class="checkmark">✓</div>
+            <h3>Request Submitted</h3>
+            <p>Your maintenance request has been successfully submitted.</p>
+            <p style="margin-top: 15px;"><strong>Tracking ID:</strong> <span id="trackingId"></span></p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('maintenanceForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const trackingId = 'DUR-' + Math.random().toString(36).substr(2, 9).toUpperCase();
+            document.getElementById('trackingId').textContent = trackingId;
+
+            document.getElementById('formContent').style.display = 'none';
+            document.getElementById('confirmation').style.display = 'block';
+
+            console.log('Durham form submitted:', {
+                address: document.getElementById('site-address').value,
+                category: document.getElementById('issue-category').value,
+                urgency: document.getElementById('urgency').value,
+                description: document.getElementById('description').value,
+                trackingId: trackingId
+            });
+        });
+    </script>
+</body>
+</html>

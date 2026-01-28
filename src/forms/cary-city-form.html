@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>City of Cary - Emergency Repair Authorization</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #e8eef3;
+            margin: 0;
+            padding: 20px;
+        }
+        .page-header {
+            background-color: #1a5490;
+            color: white;
+            padding: 20px 30px;
+            margin: -20px -20px 30px -20px;
+            border-bottom: 5px solid #ff6b35;
+        }
+        .page-header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        .page-header p {
+            margin: 5px 0 0 0;
+            font-size: 13px;
+            opacity: 0.9;
+        }
+        .form-wrapper {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 3px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .field-section {
+            background: #f8f9fa;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid #1a5490;
+        }
+        .field-section h3 {
+            margin-top: 0;
+            color: #1a5490;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+        .form-row {
+            margin-bottom: 18px;
+        }
+        .form-row label {
+            font-weight: 600;
+            color: #2c3e50;
+            font-size: 14px;
+            display: block;
+            margin-bottom: 6px;
+        }
+        .form-row label span {
+            color: #e74c3c;
+        }
+        .form-row input[type="text"],
+        .form-row select,
+        .form-row textarea {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #cbd5e0;
+            border-radius: 3px;
+            font-size: 14px;
+            background: white;
+        }
+        .form-row textarea {
+            min-height: 90px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .button-container {
+            text-align: right;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #e8eef3;
+        }
+        .btn-submit {
+            background-color: #ff6b35;
+            color: white;
+            padding: 12px 35px;
+            border: none;
+            border-radius: 3px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .btn-submit:hover {
+            background-color: #e55a26;
+        }
+        .alert-success {
+            display: none;
+            background-color: #d1f2eb;
+            border: 1px solid #1abc9c;
+            color: #0e6251;
+            padding: 25px;
+            border-radius: 3px;
+            margin-top: 20px;
+        }
+        .alert-success h4 {
+            margin: 0 0 10px 0;
+            color: #0e6251;
+        }
+    </style>
+</head>
+<body>
+    <div class="page-header">
+        <h1>Emergency Repair Authorization Form</h1>
+        <p>City of Cary Public Utilities Division | Infrastructure Maintenance</p>
+    </div>
+
+    <div class="form-wrapper">
+        <form id="repairForm">
+            <div class="field-section">
+                <h3>Location Information</h3>
+                <div class="form-row">
+                    <label>Service Location <span>*</span></label>
+                    <input type="text" id="serviceLocation" name="serviceLocation"
+                           placeholder="Street address including city and ZIP" required>
+                </div>
+            </div>
+
+            <div class="field-section">
+                <h3>Repair Details</h3>
+                <div class="form-row">
+                    <label>Problem Classification <span>*</span></label>
+                    <select id="problemType" name="problemType" required>
+                        <option value="">-- Please Select --</option>
+                        <option value="pole-damage">Utility Pole Damage</option>
+                        <option value="transformer-issue">Transformer Issue</option>
+                        <option value="line-damage">Power Line Damage</option>
+                        <option value="tower-maintenance">Tower Maintenance</option>
+                        <option value="equipment-malfunction">Equipment Malfunction</option>
+                        <option value="structural">Structural Problem</option>
+                    </select>
+                </div>
+
+                <div class="form-row">
+                    <label>Response Priority <span>*</span></label>
+                    <select id="priorityLevel" name="priorityLevel" required>
+                        <option value="">-- Please Select --</option>
+                        <option value="emergency">EMERGENCY - Immediate safety hazard</option>
+                        <option value="urgent">URGENT - Repair within 24-48 hours</option>
+                        <option value="standard">STANDARD - Schedule within 2 weeks</option>
+                        <option value="routine">ROUTINE - Regular maintenance cycle</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="field-section">
+                <h3>Additional Information</h3>
+                <div class="form-row">
+                    <label>Detailed Assessment <span>*</span></label>
+                    <textarea id="assessment" name="assessment"
+                              placeholder="Provide comprehensive details about the issue, including any measurements, observations, or recommendations..." required></textarea>
+                </div>
+            </div>
+
+            <div class="button-container">
+                <button type="submit" class="btn-submit">Submit Authorization Request</button>
+            </div>
+        </form>
+
+        <div class="alert-success" id="successAlert">
+            <h4>✓ Authorization Request Submitted Successfully</h4>
+            <p>Your repair authorization has been logged in our system.</p>
+            <p><strong>Authorization Code:</strong> <span id="authCode"></span></p>
+            <p><strong>Status:</strong> Pending Review</p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('repairForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const authCode = 'CARY-' + new Date().getFullYear() + '-' +
+                            Math.floor(Math.random() * 100000).toString().padStart(5, '0');
+            document.getElementById('authCode').textContent = authCode;
+
+            document.getElementById('repairForm').style.display = 'none';
+            document.getElementById('successAlert').style.display = 'block';
+
+            console.log('Cary form submitted:', {
+                location: document.getElementById('serviceLocation').value,
+                problemType: document.getElementById('problemType').value,
+                priority: document.getElementById('priorityLevel').value,
+                assessment: document.getElementById('assessment').value,
+                authorizationCode: authCode
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+{
+  "id": "RPT-TELECOM-445",
+  "collected": "2026-01-27T10:15:22-05:00",
+  "source": "Autonomous Ground Robot - Unit 12",
+  "location_data": {
+    "full_address": "910 Cell Tower Ln, Cary, NC 27511",
+    "lat_long": "35.7915, -78.7811"
+  },
+  "inspection_summary": {
+    "infrastructure": "Cell Tower - 5G Equipment",
+    "issue_found": "Antenna misalignment and mounting bracket corrosion",
+    "priority": "Medium",
+    "risk_score": 5
+  },
+  "detailed_notes": "Routine inspection revealed 12-degree antenna tilt deviation from optimal alignment. Mounting bracket shows surface rust and one loose bolt. Signal strength measurements confirm degraded performance in southwest coverage sector. Weather exposure likely cause - bracket needs treatment and re-torquing. Antenna realignment recommended.",
+  "attachments": ["image_001.jpg", "image_002.jpg", "signal_data.csv"]
+}

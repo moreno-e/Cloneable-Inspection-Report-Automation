@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wake County - Utility Repair Permit Application</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', serif;
+            background-color: #f5f5dc;
+            padding: 40px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        h1 {
+            color: #003366;
+            border-bottom: 3px solid #003366;
+            padding-bottom: 10px;
+        }
+        .form-group {
+            margin-bottom: 25px;
+        }
+        label {
+            display: block;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        input[type="text"], textarea, select {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #003366;
+            border-radius: 4px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        button {
+            background-color: #003366;
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        button:hover {
+            background-color: #00509e;
+        }
+        .success-message {
+            display: none;
+            background-color: #d4edda;
+            color: #155724;
+            padding: 20px;
+            border-radius: 4px;
+            margin-top: 20px;
+            border: 1px solid #c3e6cb;
+        }
+    </style>
+</head>
+<body>
+    <h1>Wake County Utility Repair Permit Application</h1>
+    <form id="permitForm">
+        <div class="form-group">
+            <label for="location">Repair Location Address:</label>
+            <input type="text" id="location" name="location" required>
+        </div>
+
+        <div class="form-group">
+            <label for="damageType">Type of Damage/Issue:</label>
+            <select id="damageType" name="damageType" required>
+                <option value="">-- Select Damage Type --</option>
+                <option value="structural">Structural Damage</option>
+                <option value="electrical">Electrical Failure</option>
+                <option value="corrosion">Corrosion/Rust</option>
+                <option value="alignment">Misalignment</option>
+                <option value="weathering">Weather Damage</option>
+                <option value="other">Other</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="severity">Priority Level:</label>
+            <select id="severity" name="severity" required>
+                <option value="">-- Select Priority --</option>
+                <option value="low">Low - Routine Maintenance</option>
+                <option value="medium">Medium - Address Within 60 Days</option>
+                <option value="high">High - Immediate Attention Required</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="notes">Detailed Description:</label>
+            <textarea id="notes" name="notes" required></textarea>
+        </div>
+
+        <button type="submit">Submit Permit Application</button>
+    </form>
+
+    <div class="success-message" id="successMessage">
+        <h3>✓ Permit Application Submitted Successfully</h3>
+        <p>Your permit application has been received and is being processed.</p>
+        <p><strong>Reference Number:</strong> <span id="refNumber"></span></p>
+    </div>
+
+    <script>
+        document.getElementById('permitForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Generate reference number
+            const refNum = 'WAKE-' + Date.now().toString().slice(-8);
+            document.getElementById('refNumber').textContent = refNum;
+
+            // Hide form and show success message
+            document.getElementById('permitForm').style.display = 'none';
+            document.getElementById('successMessage').style.display = 'block';
+
+            console.log('Form submitted:', {
+                location: document.getElementById('location').value,
+                damageType: document.getElementById('damageType').value,
+                severity: document.getElementById('severity').value,
+                notes: document.getElementById('notes').value,
+                referenceNumber: refNum
+            });
+        });
+    </script>
+</body>
+</html>

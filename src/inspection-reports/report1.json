@@ -1,0 +1,19 @@
+{
+  "report_id": "INS-2026-001",
+  "timestamp": "2026-01-27T14:30:00Z",
+  "inspector": "Field Device Alpha",
+  "site": {
+    "address": "1234 Power Line Rd, Raleigh, NC 27613",
+    "coordinates": "35.8736° N, 78.6569° W"
+  },
+  "findings": {
+    "asset_type": "Power Pole",
+    "damage_classification": "Moderate",
+    "severity_level": 3,
+    "observations": "Visible wood rot on south-facing side of utility pole. Approximately 15% structural compromise detected via imaging. Woodpecker damage also present. Recommend replacement within 60 days."
+  },
+  "metadata": {
+    "device_type": "Drone DJI-M300",
+    "weather_conditions": "Clear, 65°F"
+  }
+}

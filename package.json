@@ -1,0 +1,26 @@
+{
+  "name": "cloneable",
+  "version": "1.0.0",
+  "description": "AI-powered RPA agent for automating inspection data entry into legacy permit systems",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "tsx src/index.ts",
+    "dev": "tsx watch src/index.ts",
+    "demo": "tsx src/index.ts",
+    "test:extract": "tsx src/test-extraction.ts",
+    "test:forms": "tsx src/test-form-filling.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.71.2",
+    "@types/node": "^25.0.10",
+    "dotenv": "^17.2.3",
+    "playwright": "^1.58.0",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
+  }
+}

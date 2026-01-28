@@ -1,0 +1,29 @@
+FIELD INSPECTION REPORT
+======================
+Report ID: INS-2026-002
+Date/Time: January 27, 2026 - 16:45 EST
+Inspector: Mobile Sensor Unit B-7
+
+LOCATION INFORMATION
+-------------------
+Site Address: 5678 Transmission Ave, Durham, NC 27701
+GPS: 35.9940° N, 78.8986° W
+Utility District: Durham County Electric
+
+INSPECTION DETAILS
+------------------
+Asset Inspected: Electrical Transformer
+Damage Type: Overheating / Equipment Failure
+Severity: High (Priority 1)
+
+DESCRIPTION
+-----------
+Thermal imaging detected abnormal heat signature on primary transformer coil.
+Temperature readings 45°F above normal operating range. Oil levels appear normal
+but discoloration suggests contamination. Audible humming detected at 20ft distance.
+
+RECOMMENDATION: Immediate shutdown and replacement required. Risk of cascading
+failure to connected infrastructure. Estimated outage impact: 250 residential customers.
+
+Device: Thermal Camera FLIR-T1040
+Conditions: Overcast, 52°F, Light wind
